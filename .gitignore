@@ -1,0 +1,27 @@
+# --- design-canvas source & runtime (authoring only, not deployed) ---
+*.dc.html
+support.js
+ds-base.js
+image-slot.js
+_ds/
+
+# --- original full-resolution photographs (public/images holds the
+#     web derivatives that actually ship) ---
+uploads/
+
+# --- local tooling / editor ---
+.claude/
+.vscode/
+.idea/
+node_modules/
+
+# --- OS noise ---
+.DS_Store
+._*
+Thumbs.db
+
+# --- never commit secrets ---
+.env
+.env.*
+*.pem
+*.key

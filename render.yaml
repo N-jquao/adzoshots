@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: adzoshots
+    runtime: static
+    # Nothing to compile — `public/` is the finished site.
+    buildCommand: "echo 'static site: nothing to build'"
+    staticPublishPath: ./public
+    pullRequestPreviewsEnabled: false
+
+    headers:
+      # Photo derivatives are content-stable (width is baked into the filename).
+      - path: /images/*
+        name: Cache-Control
+        value: public, max-age=2592000
+      # CSS/JS are not content-hashed, so keep the window short.
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=3600
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+
+    routes:
+      # Single page: send stray paths to the homepage rather than a 404 page.
+      - type: rewrite
+        source: /index.html
+        destination: /
