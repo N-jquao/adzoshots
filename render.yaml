@@ -27,7 +27,7 @@ services:
         value: SAMEORIGIN
 
     routes:
-      # Single page: send stray paths to the homepage rather than a 404 page.
-      - type: rewrite
+      # Keep the canonical URL extensionless: /index.html sends you to /.
+      - type: redirect
         source: /index.html
         destination: /
